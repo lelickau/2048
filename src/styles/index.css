@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: none;
+  text-decoration: none;
+  font-family: Nunito, sans-serif;
+}
+
+html {
+  --cell-size: 15vmin;
+  --cell-gap: 2vmin;
+  --y: 0;
+  --x: 0;
+}
+
+body {
+  background: #5A407D;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  width: 98%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.header__box {
+  display: flex;
+  gap: 20px;
+}
+
+.footer {
+  width: 98%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.description {
+  font-size: 25px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5B74E0;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  width: fit-content;
+}
+.btn-accent {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background-color: #EE5573;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.logo {
+  font-size: 35px;
+  font-weight: 700;
+  color: #fff;
+}
+
+#game-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, var(--cell-size));
+  grid-template-rows: repeat(4, var(--cell-size));
+  gap: var(--cell-gap);
+  border-radius: 1vmin;
+}
+
+.cell {
+  background: #3D2964;
+  border-radius: 1vmin;
+
+}
+
+.tile {
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)));
+  left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border-radius: 1vmin;
+  font-size: 7.5vmin;
+  font-weight: bold;
+  background-color: hsl(180, 60%, var(--bg-lightness));
+  color: hsl(25, 60%, var(--text-lightness));
+  transition: 100ms;
+  animation: show 200ms;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+}
+
+@media(max-width: 770px) {
+  .description {
+    font-size: 16px;
+  }
+
+  .navigate svg {
+    width: 50px;
+    height: 40px;
+  }
+}
+
+@media(max-width: 465px) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
