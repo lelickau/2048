@@ -1,42 +1,52 @@
 class Tile {
-    constructor(gridElement) {
-        this.tileElement = document.createElement('div')
-        this.tileElement.classList.add('tile')
-        this.setValue(Math.random() > 0.5 ? 2 : 4)
+    constructor(gridElement, value = getRandomValue()) {
+        this.tileElement = document.createElement("div")
+        this.tileElement.classList.add("tile")
         gridElement.append(this.tileElement)
-    }
-
     
-    setXY(x, y) {
-        this.x = x
-        this.y = y
-        this.tileElement.style.setProperty('--x', `${x}`)
-        this.tileElement.style.setProperty('--y', `${y}`)
-    }
+        this.setValue(value)
+      }
     
-    setValue(value) {
+      setValue(value) {
         this.value = value
-        this.tileElement.textContent = `${this.value}`
-        const bgLightness = 100 - Math.log2(value) * 9
-        this.tileElement.style.setProperty('--bg-lightness', `${bgLightness}%`)
-        this.tileElement.style.setProperty('--text-lightness', `${bgLightness < 50 ? 90 : 10}%`)
-    }
-
-    removeFromDOM() {
+        this.tileElement.textContent = value
+        const power = Math.log2(value)
+        const bgLightness = 100 - power * 9
+        this.tileElement.style.setProperty("--bg-lightness", `${bgLightness}%`)
+        this.tileElement.style.setProperty("--text-lightness", `${bgLightness <= 50 ? 90 : 10}%`)
+      }
+    
+      setX(x) {
+        this.x = x
+        this.tileElement.style.setProperty("--x", x)
+      }
+    
+      setY(y) {
+        this.y = y
+        this.tileElement.style.setProperty("--y", y)
+      }
+    
+      removeFromDOM() {
         this.tileElement.remove()
-    }
-
-    waitForTransitionEnd() {
+      }
+    
+      waitForTransitionEnd() {
         return new Promise(resolve => {
-            this.tileElement.addEventListener('transitionend', resolve, { once: true })
+          this.tileElement.addEventListener(
+            "transitionend", resolve, { once: true })
         })
-    }
-
-    waitForAnimationEnd() {
+      }
+    
+      waitForAnimationEnd() {
         return new Promise(resolve => {
-            this.tileElement.addEventListener('animationend', resolve, { once: true })
+          this.tileElement.addEventListener(
+            "animationend", resolve, { once: true })
         })
-    }
+      }
 }
+
+function getRandomValue() {
+    return Math.random() > 0.5 ? 2 : 4
+  }
 
 export default Tile
